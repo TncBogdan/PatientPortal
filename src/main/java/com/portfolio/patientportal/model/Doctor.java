@@ -21,7 +21,7 @@ public class Doctor {
     @NotEmpty(message = "Specialty is missing")
     private String specialty;
 
-    @OneToMany(mappedBy = "doctor")
+    @ManyToMany
     private List<Hospital> hospitals;
 
     @OneToMany(mappedBy = "receiver")

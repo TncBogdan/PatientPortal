@@ -24,6 +24,9 @@ public class Hospital {
     @OneToMany
     private List<Office> offices;
 
+    @ManyToMany
+    private List<Doctor> doctors;
+
     public Long getId() {
         return id;
     }
@@ -54,5 +57,13 @@ public class Hospital {
 
     public void setOffices(List<Office> offices) {
         this.offices = offices;
+    }
+
+    public List<Doctor> getDoctors() {
+        return doctors;
+    }
+
+    public void setDoctors(List<Doctor> doctors) {
+        this.doctors = doctors;
     }
 }
