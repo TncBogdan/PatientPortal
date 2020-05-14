@@ -13,7 +13,7 @@ public class TimeSlot {
     private LocalDateTime startDate;
     private LocalDateTime endDate;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "doctor_id")
     private Doctor doctor;
 

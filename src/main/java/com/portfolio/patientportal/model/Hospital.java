@@ -5,9 +5,10 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.List;
+import java.util.Set;
 
 @Entity
-@Table(name="hospitals")
+@Table(name = "hospitals")
 public class Hospital {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,11 +22,11 @@ public class Hospital {
     @NotEmpty(message = "Specialty is missing")
     private String specialty;
 
-    @OneToMany
+    @OneToMany(mappedBy = "hospital")
     private List<Office> offices;
 
-    @ManyToMany
-    private List<Doctor> doctors;
+    @ManyToMany(fetch = FetchType.LAZY)
+    private Set<Doctor> doctors;
 
     public Long getId() {
         return id;
@@ -59,11 +60,11 @@ public class Hospital {
         this.offices = offices;
     }
 
-    public List<Doctor> getDoctors() {
+    public Set<Doctor> getDoctors() {
         return doctors;
     }
 
-    public void setDoctors(List<Doctor> doctors) {
+    public void setDoctors(Set<Doctor> doctors) {
         this.doctors = doctors;
     }
 }

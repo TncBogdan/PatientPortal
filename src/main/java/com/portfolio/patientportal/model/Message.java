@@ -21,12 +21,12 @@ public class Message {
     @NotEmpty(message = "Answer is missing")
     private String answer;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "patient_id")
     @NotNull(message = "Sender is missing")
     private Patient sender;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "doctor_id")
     @NotNull(message = "Receiver is missing")
     private Doctor receiver;

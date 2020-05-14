@@ -5,6 +5,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "doctors")
@@ -21,8 +22,8 @@ public class Doctor {
     @NotEmpty(message = "Specialty is missing")
     private String specialty;
 
-    @ManyToMany
-    private List<Hospital> hospitals;
+    @ManyToMany(fetch = FetchType.LAZY)
+    private Set<Hospital> hospitals;
 
     @OneToMany(mappedBy = "receiver")
     private List<Message> messages;
@@ -49,11 +50,11 @@ public class Doctor {
         this.name = name;
     }
 
-    public List<Hospital> getHospitals() {
+    public Set<Hospital> getHospitals() {
         return hospitals;
     }
 
-    public void setHospital(List<Hospital> hospitals) {
+    public void setHospital(Set<Hospital> hospitals) {
         this.hospitals = hospitals;
     }
 
