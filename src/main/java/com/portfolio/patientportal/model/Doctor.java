@@ -5,6 +5,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @Entity
@@ -48,6 +49,14 @@ public class Doctor {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getSpecialty() {
+        return specialty;
+    }
+
+    public void setSpecialty(String specialty) {
+        this.specialty = specialty;
     }
 
     public Set<Hospital> getHospitals() {
