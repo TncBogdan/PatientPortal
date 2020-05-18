@@ -18,7 +18,9 @@ public class Patient {
 
     @NotEmpty(message = "Name is missing")
     @Size(min = 3)
-    @Pattern(regexp = "^([A-Z][a-z]* *)+")
+//    @Pattern(regexp = "\"^([A-Z][a-z]* *)+\"")
+    @Pattern(regexp = "^[-a-zA-Z0-9._]+")
+//    @Pattern(regexp = "^[-\\w.]+")
     private String name;
 
     @NotNull(message = "Age is missing")

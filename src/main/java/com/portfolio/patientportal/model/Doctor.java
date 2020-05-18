@@ -17,7 +17,8 @@ public class Doctor {
 
     @NotEmpty(message = "Name is missing")
     @Size(min = 3)
-    @Pattern(regexp = "^[A-Z].*")
+    @Pattern(regexp = "^[-a-zA-Z0-9._]+")
+//    @Pattern(regexp = "^[A-Z].*")
     private String name;
 
     @NotEmpty(message = "Specialty is missing")
