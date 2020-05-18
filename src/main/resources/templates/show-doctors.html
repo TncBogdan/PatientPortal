@@ -9,6 +9,23 @@
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
+<table>
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Specialty</th>
+        <th>Hospitals</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="doctor:${doctors}">
+        <td th:text="${doctor.id}">
+        <td th:text="${doctor.name}">
+        <td th:text="${doctor.specialty}">
+    </tr>
+    </tbody>
+</table>
 <div th:text="${doctorName}"></div>
 <div th:text="${doctorSpecialty}"></div>
 <div th:fragment="footerfiles">
