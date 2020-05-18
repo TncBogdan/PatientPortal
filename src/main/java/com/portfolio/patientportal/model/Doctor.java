@@ -17,8 +17,8 @@ public class Doctor {
 
     @NotEmpty(message = "Name is missing")
     @Size(min = 3)
-    @Pattern(regexp = "^[-a-zA-Z0-9._]+")
-//    @Pattern(regexp = "^[A-Z].*")
+//    @Pattern(regexp = "^[-a-zA-Z0-9._]+")
+    @Pattern(regexp = "^[A-Z].*")
     private String name;
 
     @NotEmpty(message = "Specialty is missing")
@@ -35,6 +35,14 @@ public class Doctor {
 
     @OneToMany(mappedBy = "doctor")
     private List<Appointment> appointments;
+
+    public Doctor() {
+    }
+
+    public Doctor(String name, String specialty) {
+        this.name = name;
+        this.specialty = specialty;
+    }
 
     public Long getId() {
         return id;

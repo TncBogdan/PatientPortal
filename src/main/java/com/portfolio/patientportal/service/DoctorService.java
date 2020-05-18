@@ -28,6 +28,10 @@ public class DoctorService {
         this.appointmentRepository = appointmentRepository;
     }
 
+    public void save(Doctor doctor){
+        doctorRepository.save(doctor);
+    }
+
     public List<Doctor> getAll() {
         return doctorRepository.findAll();
     }
