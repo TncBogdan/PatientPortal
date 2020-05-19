@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -30,16 +29,22 @@ public class DoctorController {
         return "show-doctors";
     }
 
-    @GetMapping("/")
-    String showForm(){
-        return "doctors";
-    }
-
     @PostMapping("/doctors")
-    String createDoctor(HttpServletRequest request, Model model){
+    String createDoctor(HttpServletRequest request, Model model) {
         String name = request.getParameter("name");
         String specialty = request.getParameter("specialty");
         doctorService.save(new Doctor(name, specialty));
+        return "show-doctors";
+    }
+
+    @PostMapping("/doctors/{id}")
+    String updateDoctor(@PathVariable Long id, HttpServletRequest request, Model model) {
+        String name = request.getParameter("newName");
+        String specialty = request.getParameter("newSpecialty");
+        Doctor doctor = doctorService.getById(id);
+        doctor.setName(name);
+        doctor.setSpecialty(specialty);
+        doctorService.save(doctor);
         return "show-doctors";
     }
 }
