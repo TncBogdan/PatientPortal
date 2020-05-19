@@ -53,6 +53,10 @@ public class DoctorService {
         return hospital.getDoctors();
     }
 
+    public void delete(Doctor doctor) {
+        doctorRepository.delete(doctor);
+    }
+
 //    public Set<Hospital> getHospitals(Long id) {
 //        return getById(id).getHospitals();
 //    }

@@ -2,15 +2,6 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="_genericTemplate::headerfiles"></head>
 <body>
-<form th:action="@{/doctors}" method="post">
-    <label>Insert name
-        <input type="text" name="name">
-    </label>
-    <label>Insert specialty
-        <input type="text" name="specialty">
-    </label>
-    <input type="submit" value="create doctor">
-</form>
 
 <div th:replace="_genericTemplate::footerfiles"></div>
 </body>

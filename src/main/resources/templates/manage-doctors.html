@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="_genericTemplate::headerfiles"></head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Specialty</th>
+        <th>Hospitals</th>
+        <th style="text-align: center">Edit doctor</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="doctor:${doctors}">
+        <td th:text="${doctor.id}"></td>
+        <td th:text="${doctor.name}"></td>
+        <td th:text="${doctor.specialty}"></td>
+        <td></td>
+        <td>
+            <form th:action="@{/editDoctors/{id}(id=${doctor.id})}" method="post">
+                <label>New name<input type="text" th:name="${'new_name_for_doctor_id_'+doctor.id}" th:value="${doctor.name}"> </label>
+                <label>New specialty<input type="text" th:name="${'new_specialty_for_doctor_id_'+doctor.id}" th:value="${doctor.specialty}"></label>
+                <input type="submit" value="Update doctor">
+            </form>
+            <form th:action="@{/doctors/{id}(id=${doctor.id})}" method="post">
+                <input type="submit" value="Delete doctor">
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<br>
+<form th:action="@{/doctors}" method="post">
+    <label>Insert name
+        <input type="text" name="name">
+    </label>
+    <label>Insert specialty
+        <input type="text" name="specialty">
+    </label>
+    <input type="submit" value="Create doctor">
+</form>
+<div th:replace="_genericTemplate::footerfiles"></div>
+</body>
+</html>
