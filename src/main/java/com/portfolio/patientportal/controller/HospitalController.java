@@ -17,7 +17,7 @@ public class HospitalController {
     @Autowired
     private HospitalService hospitalService;
 
-    @GetMapping("/hospitals")
+    @GetMapping("/getHospitals")
     String getHospitals(Model model) {
         model.addAttribute("hospitals", hospitalService.getAll());
         return "manage-hospitals";
@@ -40,21 +40,21 @@ public class HospitalController {
 
     @PostMapping("/editHospitals/{id}")
     String updateHospital(@PathVariable Long id, HttpServletRequest request, Model model){
-        String name = request.getParameter("new_name_for_Hospital_id_" + id);
-        String specialty = request.getParameter("new_specialty_for_Hospital_id_" + id);
+        String name = request.getParameter("new_name_for_hospital_id_" + id);
+        String specialty = request.getParameter("new_specialty_for_hospital_id_" + id);
         Hospital Hospital = hospitalService.getById(id);
         Hospital.setName(name);
         Hospital.setSpecialty(specialty);
         hospitalService.save(Hospital);
-        model.addAttribute("Hospitals", hospitalService.getAll());
-        return "manage-Hospitals";
+        model.addAttribute("hospitals", hospitalService.getAll());
+        return "manage-hospitals";
     }
 
-    @PostMapping("/Hospitals/{id}")
+    @PostMapping("/hospitals/{id}")
     String deleteHospital(@PathVariable Long id, Model model){
         Hospital Hospital = hospitalService.getById(id);
         hospitalService.delete(Hospital);
-        model.addAttribute("Hospitals", hospitalService.getAll());
-        return "manage-Hospitals";
+        model.addAttribute("hospitals", hospitalService.getAll());
+        return "manage-hospitals";
     }
 }
