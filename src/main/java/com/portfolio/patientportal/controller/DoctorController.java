@@ -51,7 +51,7 @@ public class DoctorController {
     }
 
     @PostMapping("/doctors/{id}")
-    String deleteDoctor(@PathVariable Long id, HttpServletRequest request, Model model) {
+    String deleteDoctor(@PathVariable Long id, Model model) {
         Doctor doctor = doctorService.getById(id);
         doctorService.delete(doctor);
         model.addAttribute("doctors", doctorService.getAll());
