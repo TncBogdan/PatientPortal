@@ -16,7 +16,6 @@
         <td th:text="${patient.id}"></td>
         <td th:text="${patient.name}"></td>
         <td th:text="${patient.age}"></td>
-        <td></td>
         <td>
             <form th:action="@{/editPatients/{id}(id=${patient.id})}" method="post">
                 <label>New name<input type="text" th:name="${'new_name_for_patient_id_'+patient.id}" th:value="${patient.name}"> </label>
