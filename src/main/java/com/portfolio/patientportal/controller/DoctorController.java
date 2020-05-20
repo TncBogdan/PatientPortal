@@ -1,7 +1,9 @@
 package com.portfolio.patientportal.controller;
 
 import com.portfolio.patientportal.model.Doctor;
+import com.portfolio.patientportal.model.Hospital;
 import com.portfolio.patientportal.service.DoctorService;
+import com.portfolio.patientportal.service.HospitalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 public class DoctorController {
     @Autowired
     private DoctorService doctorService;
+    private HospitalService hospitalService;
 
     @GetMapping("/getDoctors")
     String getDoctors(Model model) {
@@ -67,6 +70,16 @@ public class DoctorController {
     String deleteDoctor(@PathVariable Long id, Model model) {
         Doctor doctor = doctorService.getById(id);
         doctorService.delete(doctor);
+        model.addAttribute("doctors", doctorService.getAll());
+        return "manage-doctors";
+    }
+
+    @PostMapping("/doctors/{id}/addHospital")
+    String addHospital(HttpServletRequest request, @PathVariable Long doctorId, Model model){
+        Doctor doctor = doctorService.getById(doctorId);
+        Hospital hospital = hospitalService.getById(Long.parseLong(request.getParameter("hospitalId")));
+        doctor.addHospital(hospital);
+        doctorService.save(doctor);
         model.addAttribute("doctors", doctorService.getAll());
         return "manage-doctors";
     }

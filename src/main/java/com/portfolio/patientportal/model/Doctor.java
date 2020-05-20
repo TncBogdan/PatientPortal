@@ -83,4 +83,8 @@ public class Doctor {
     public void setMessages(List<Message> messages) {
         this.messages = messages;
     }
+
+    public void addHospital(Hospital hospital){
+        hospitals.add(hospital);
+    }
 }

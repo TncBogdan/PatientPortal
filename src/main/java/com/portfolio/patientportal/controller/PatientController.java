@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -17,7 +18,7 @@ public class PatientController {
     @Autowired
     private PatientService patientService;
 
-    @GetMapping("/getPatients")
+    @GetMapping("/patients")
     String getPatients(Model model) {
         model.addAttribute("patients", patientService.getAll());
         return "manage-patients";
@@ -63,5 +64,4 @@ public class PatientController {
         model.addAttribute("patients", patientService.getAll());
         return "manage-patients";
     }
-
 }

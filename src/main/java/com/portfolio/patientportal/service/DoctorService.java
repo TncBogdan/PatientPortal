@@ -1,12 +1,12 @@
 package com.portfolio.patientportal.service;
 
-import com.portfolio.patientportal.model.*;
+import com.portfolio.patientportal.model.Doctor;
+import com.portfolio.patientportal.model.Hospital;
 import com.portfolio.patientportal.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -28,7 +28,7 @@ public class DoctorService {
         this.appointmentRepository = appointmentRepository;
     }
 
-    public void save(Doctor doctor){
+    public void save(Doctor doctor) {
         doctorRepository.save(doctor);
     }
 
@@ -56,6 +56,14 @@ public class DoctorService {
     public void delete(Doctor doctor) {
         doctorRepository.delete(doctor);
     }
+
+//    public void addHospital(Long doctorId, Long hospitalId) {
+//        Doctor doctor = getById(doctorId);
+//        Set<Hospital> currentHospital = doctor.getHospitals();
+//        currentHospital.add(hospitalRepository.getOne(hospitalId));
+//        doctor.setHospital(currentHospital);
+//        doctorRepository.save(doctor);
+//    }
 
 //    public Set<Hospital> getHospitals(Long id) {
 //        return getById(id).getHospitals();
