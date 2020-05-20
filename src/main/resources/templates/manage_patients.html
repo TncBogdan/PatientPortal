@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="_genericTemplate::headerfiles"></head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Age</th>
+        <th style="text-align: center">Edit patient</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="patient:${patients}">
+        <td th:text="${patient.id}"></td>
+        <td th:text="${patient.name}"></td>
+        <td th:text="${patient.age}"></td>
+        <td></td>
+        <td>
+            <form th:action="@{/editPatients/{id}(id=${patient.id})}" method="post">
+                <label>New name<input type="text" th:name="${'new_name_for_patient_id_'+patient.id}" th:value="${patient.name}"> </label>
+                <label>New age<input type="text" th:name="${'new_age_for_patient_id_'+patient.id}" th:value="${patient.age}"></label>
+                <input type="submit" value="Update patient">
+            </form>
+            <form th:action="@{/patients/{id}(id=${patient.id})}" method="post">
+                <input type="submit" value="Delete patient">
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<br>
+<form th:action="@{/patients}" method="post">
+    <label>Insert name
+        <input type="text" name="name">
+    </label>
+    <label>Insert age
+        <input type="text" name="age">
+    </label>
+    <input type="submit" value="Create patient">
+</form>
+<div th:replace="_genericTemplate::footerfiles"></div>
+</body>
+</html>
