@@ -33,6 +33,14 @@ public class Patient {
     @OneToMany(mappedBy = "patient")
     private List<Appointment> appointments;
 
+    public Patient() {
+    }
+
+    public Patient(String name, Integer age) {
+        this.name = name;
+        this.age = age;
+    }
+
     public Long getId() {
         return id;
     }

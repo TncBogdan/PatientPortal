@@ -18,7 +18,22 @@ public class PatientService {
     }
 
     public Patient save(Patient patient){
-      return   patientRepository.save(patient);
+      return  patientRepository.save(patient);
     }
 
+    public Patient getById(Long id) {
+        return patientRepository.getOne(id);
+    }
+
+    public void delete(Patient patient) {
+        patientRepository.delete(patient);
+    }
+
+    public List<Patient> getByAge(Integer age) {
+       return patientRepository.findByAge(age);
+    }
+
+    public List<Patient> getByName(String name) {
+        return patientRepository.findByName(name);
+    }
 }

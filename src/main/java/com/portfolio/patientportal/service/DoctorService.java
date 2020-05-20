@@ -44,7 +44,7 @@ public class DoctorService {
         return doctorRepository.findByName(name);
     }
 
-    public Doctor getBySpecialty(String specialty) {
+    public List<Doctor> getBySpecialty(String specialty) {
         return doctorRepository.findBySpecialty(specialty);
     }
 

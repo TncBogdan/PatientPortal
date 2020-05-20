@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -26,6 +27,18 @@ public class DoctorController {
     String getDoctorById(@PathVariable Long id, Model model) {
         model.addAttribute("doctorName", doctorService.getById(id).getName());
         model.addAttribute("doctorSpecialty", doctorService.getById(id).getSpecialty());
+        return "manage-doctors";
+    }
+
+    @GetMapping("/doctors/{specialty}")
+    String getAllDoctorBySpecilty(@RequestParam("specialty") String specialty, Model model) {
+        model.addAttribute("doctorSpecialty", doctorService.getBySpecialty(specialty));
+        return "manage-doctors";
+    }
+
+    @GetMapping("/doctors/{name}")
+    String getAllDoctorByName(@RequestParam("name") String name, Model model) {
+        model.addAttribute("doctorName", doctorService.getByName(name));
         return "manage-doctors";
     }
 
