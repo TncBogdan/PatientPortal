@@ -16,13 +16,19 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class DoctorController {
+    private final DoctorService doctorService;
+    private final HospitalService hospitalService;
+
     @Autowired
-    private DoctorService doctorService;
-    private HospitalService hospitalService;
+    public DoctorController(DoctorService doctorService, HospitalService hospitalService) {
+        this.doctorService = doctorService;
+        this.hospitalService = hospitalService;
+    }
 
     @GetMapping("/getDoctors")
     String getDoctors(Model model) {
         model.addAttribute("doctors", doctorService.getAll());
+        model.addAttribute("hospitals", hospitalService.getAll());
         return "manage-doctors";
     }
 
@@ -34,14 +40,14 @@ public class DoctorController {
     }
 
     @GetMapping("/doctors/{specialty}")
-    String getAllDoctorBySpecilty(@RequestParam("specialty") String specialty, Model model) {
-        model.addAttribute("doctorSpecialty", doctorService.getBySpecialty(specialty));
+    String getDoctorsBySpecialty(@RequestParam("specialty") String specialty, Model model) {
+        model.addAttribute("doctors", doctorService.getBySpecialty(specialty));
         return "manage-doctors";
     }
 
     @GetMapping("/doctors/{name}")
-    String getAllDoctorByName(@RequestParam("name") String name, Model model) {
-        model.addAttribute("doctorName", doctorService.getByName(name));
+    String getDoctorsByName(@RequestParam("name") String name, Model model) {
+        model.addAttribute("doctors", doctorService.getByName(name));
         return "manage-doctors";
     }
 
@@ -51,6 +57,7 @@ public class DoctorController {
         String specialty = request.getParameter("specialty");
         doctorService.save(new Doctor(name, specialty));
         model.addAttribute("doctors", doctorService.getAll());
+        model.addAttribute("hospitals", hospitalService.getAll());
         return "manage-doctors";
     }
 
@@ -63,6 +70,7 @@ public class DoctorController {
         doctor.setSpecialty(specialty);
         doctorService.save(doctor);
         model.addAttribute("doctors", doctorService.getAll());
+        model.addAttribute("hospitals", hospitalService.getAll());
         return "manage-doctors";
     }
 
@@ -71,6 +79,7 @@ public class DoctorController {
         Doctor doctor = doctorService.getById(id);
         doctorService.delete(doctor);
         model.addAttribute("doctors", doctorService.getAll());
+        model.addAttribute("hospitals", hospitalService.getAll());
         return "manage-doctors";
     }
 
@@ -81,6 +90,7 @@ public class DoctorController {
         doctor.addHospital(hospital);
         doctorService.save(doctor);
         model.addAttribute("doctors", doctorService.getAll());
+        model.addAttribute("hospitals", hospitalService.getAll());
         return "manage-doctors";
     }
 }

@@ -17,11 +17,15 @@
         <td th:text="${doctor.id}"></td>
         <td th:text="${doctor.name}"></td>
         <td th:text="${doctor.specialty}"></td>
-        <td></td>
+        <td><span th:each="hospital:${doctor.hospitals}" th:text="${hospital.name} + '; '">
+            </span></td>
         <td>
             <form th:action="@{/editDoctors/{id}(id=${doctor.id})}" method="post">
                 <label>New name<input type="text" th:name="${'new_name_for_doctor_id_'+doctor.id}" th:value="${doctor.name}"> </label>
                 <label>New specialty<input type="text" th:name="${'new_specialty_for_doctor_id_'+doctor.id}" th:value="${doctor.specialty}"></label>
+                <select name="hospitalId">
+                    <option th:each="hospital:${hospitals}" th:text="${hospital.name}" th:value="${hospital.id}"></option>
+                </select>
                 <input type="submit" value="Update doctor">
             </form>
             <form th:action="@{/doctors/{id}(id=${doctor.id})}" method="post">
