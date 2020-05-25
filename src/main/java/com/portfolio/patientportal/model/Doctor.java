@@ -27,6 +27,9 @@ public class Doctor {
     @ManyToMany(fetch = FetchType.LAZY)
     private Set<Hospital> hospitals;
 
+    @ManyToMany(fetch = FetchType.LAZY)
+    private Set<Office> offices;
+
     @OneToMany(mappedBy = "receiver")
     private List<Message> messages;
 
@@ -76,6 +79,14 @@ public class Doctor {
         this.hospitals = hospitals;
     }
 
+    public Set<Office> getOffices() {
+        return offices;
+    }
+
+    public void setOffices(Set<Office> offices) {
+        this.offices = offices;
+    }
+
     public List<Message> getMessages() {
         return messages;
     }
@@ -84,7 +95,11 @@ public class Doctor {
         this.messages = messages;
     }
 
-    public void addHospital(Hospital hospital){
+    public void addHospital(Hospital hospital) {
         hospitals.add(hospital);
+    }
+
+    public void deleteHospital(Hospital hospital) {
+        hospitals.remove(hospital);
     }
 }

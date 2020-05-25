@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -18,21 +17,21 @@ public class PatientController {
     @Autowired
     private PatientService patientService;
 
-    @GetMapping("/patients")
+    @GetMapping("/getPatients")
     String getPatients(Model model) {
         model.addAttribute("patients", patientService.getAll());
-        return "manage-patients";
-    }
-
-    @GetMapping("/patients/{age}")
-    String getPatientsByAge(@PathVariable Integer age, Model model){
-        model.addAttribute("patientsByAge", patientService.getByAge(age));
         return "manage-patients";
     }
 
     @GetMapping("/patients/{name}")
     String getPatiensByName(@PathVariable String name, Model model){
         model.addAttribute("patientsByName", patientService.getByName(name));
+        return "manage-patients";
+    }
+
+    @GetMapping("/patients/{age}")
+    String getPatientsByAge(@PathVariable Integer age, Model model){
+        model.addAttribute("patientsByAge", patientService.getByAge(age));
         return "manage-patients";
     }
 

@@ -39,15 +39,15 @@ public class DoctorController {
         return "manage-doctors";
     }
 
-    @GetMapping("/doctors/{specialty}")
-    String getDoctorsBySpecialty(@RequestParam("specialty") String specialty, Model model) {
-        model.addAttribute("doctors", doctorService.getBySpecialty(specialty));
-        return "manage-doctors";
-    }
-
     @GetMapping("/doctors/{name}")
     String getDoctorsByName(@RequestParam("name") String name, Model model) {
         model.addAttribute("doctors", doctorService.getByName(name));
+        return "manage-doctors";
+    }
+
+    @GetMapping("/doctors/{specialty}")
+    String getDoctorsBySpecialty(@RequestParam("specialty") String specialty, Model model) {
+        model.addAttribute("doctors", doctorService.getBySpecialty(specialty));
         return "manage-doctors";
     }
 
@@ -65,9 +65,18 @@ public class DoctorController {
     String updateDoctor(@PathVariable Long id, HttpServletRequest request, Model model) {
         String name = request.getParameter("new_name_for_doctor_id_" + id);
         String specialty = request.getParameter("new_specialty_for_doctor_id_" + id);
+        String editHospitalOperation = request.getParameter("edit_hospital_for_doctor_id_" + id);
+        Hospital hospital = hospitalService.getById(Long.parseLong(request.getParameter("new_hospital_for_doctor_id_" + id)));
         Doctor doctor = doctorService.getById(id);
         doctor.setName(name);
         doctor.setSpecialty(specialty);
+        if (editHospitalOperation != null) {
+            if (editHospitalOperation.equals("add")) {
+                doctor.addHospital(hospital);
+            } else {
+                doctor.deleteHospital(hospital);
+            }
+        }
         doctorService.save(doctor);
         model.addAttribute("doctors", doctorService.getAll());
         model.addAttribute("hospitals", hospitalService.getAll());
@@ -83,14 +92,4 @@ public class DoctorController {
         return "manage-doctors";
     }
 
-    @PostMapping("/doctors/{id}/addHospital")
-    String addHospital(HttpServletRequest request, @PathVariable Long doctorId, Model model){
-        Doctor doctor = doctorService.getById(doctorId);
-        Hospital hospital = hospitalService.getById(Long.parseLong(request.getParameter("hospitalId")));
-        doctor.addHospital(hospital);
-        doctorService.save(doctor);
-        model.addAttribute("doctors", doctorService.getAll());
-        model.addAttribute("hospitals", hospitalService.getAll());
-        return "manage-doctors";
-    }
 }
