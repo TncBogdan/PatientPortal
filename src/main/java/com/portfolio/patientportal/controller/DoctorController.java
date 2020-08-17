@@ -91,5 +91,4 @@ public class DoctorController {
         model.addAttribute("hospitals", hospitalService.getAll());
         return "manage-doctors";
     }
-
 }

@@ -18,7 +18,6 @@ public class DoctorService {
     private AppointmentRepository appointmentRepository;
 
     @Autowired
-
     public DoctorService(DoctorRepository doctorRepository, HospitalRepository hospitalRepository, MessageRepository messageRepository,
                          TimeSlotRepository timeSlotRepository, AppointmentRepository appointmentRepository) {
         this.doctorRepository = doctorRepository;
