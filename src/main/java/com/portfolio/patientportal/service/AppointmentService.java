@@ -24,7 +24,7 @@ public class AppointmentService {
         this.timeSlotRepository = timeSlotRepository;
     }
 
-    public void createAppointment (Appointment appointment, Long timeSlotId){
+    public void createAppointment(Appointment appointment, Long timeSlotId) {
         TimeSlot timeSlot = timeSlotRepository.getOne(timeSlotId);
         appointment.setTimeSlot(timeSlot);
         appointmentRepository.save(appointment);

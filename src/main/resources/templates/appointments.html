@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="_genericTemplate::headerfiles"></head>
+<body>
+<table style="width: 50%">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Age</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="patient:${patients}">
+        <td th:text="${patient.id}"></td>
+        <td th:text="${patient.name}"></td>
+        <td th:text="${patient.age}"></td>
+    </tr>
+    </tbody>
+</table>
+<form th:action="@{/patients/{id}(id=${patient.id})/new-appointment}" method="post">
+    <label>Insert patient id: <input type="number"></label>
+    <select name="doctors">
+        <option th:each="doctor:${doctors}" th:text="${doctor.name + ' - ' + doctor.specialty}" th:value="${doctor.id}"></option>
+    </select>
+    <input type="Submit" value="Make appointment">
+</form>
+</body>
+</html>

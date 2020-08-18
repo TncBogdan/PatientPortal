@@ -9,7 +9,7 @@ public class TimeSlot {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private boolean isAvailable = true;
+//    private boolean isAvailable = true;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
 
@@ -28,13 +28,13 @@ public class TimeSlot {
         this.id = id;
     }
 
-    public boolean isAvailable() {
-        return isAvailable;
-    }
-
-    public void setAvailable(boolean available) {
-        isAvailable = available;
-    }
+//    public boolean isAvailable() {
+//        return isAvailable;
+//    }
+//
+//    public void setAvailable(boolean available) {
+//        isAvailable = available;
+//    }
 
     public LocalDateTime getStartDate() {
         return startDate;
